@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Local agent / build files
+.claude/
+.agent/
+.agents/
+node_modules/
+vendor/
+build/
+dist/
+*.log
+
+# Backups
+*.orig
+*~

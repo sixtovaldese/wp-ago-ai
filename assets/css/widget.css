@@ -1,0 +1,65 @@
+/* aGo AI — Chat Widget CSS */
+#ago-ai-widget { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.5; }
+
+/* Toggle button */
+.ago-ai-toggle { position: fixed; bottom: 20px; z-index: 99998; width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+.ago-ai-toggle:hover { transform: scale(1.1); }
+.ago-ai-toggle svg { width: 28px; height: 28px; fill: #fff; }
+.ago-ai-toggle.right { right: 20px; }
+.ago-ai-toggle.left { left: 20px; }
+.ago-ai-toggle.ago-offset-1 { bottom: 100px; }
+.ago-ai-toggle.ago-offset-2 { bottom: 180px; }
+
+/* Chat window */
+.ago-ai-window { position: fixed; bottom: 90px; z-index: 99999; width: 380px; max-width: calc(100vw - 40px); height: 500px; max-height: calc(100vh - 120px); border-radius: 16px; background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; }
+.ago-ai-window.right { right: 20px; }
+.ago-ai-window.left { left: 20px; }
+.ago-ai-window.ago-offset-1 { bottom: 170px; }
+.ago-ai-window.ago-offset-2 { bottom: 250px; }
+.ago-ai-window.open { display: flex; }
+
+/* Header */
+.ago-ai-header { padding: 14px 16px; display: flex; align-items: center; gap: 10px; color: #fff; }
+.ago-ai-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.ago-ai-header-info h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.ago-ai-header-info span { font-size: 12px; opacity: 0.8; }
+.ago-ai-close { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; margin-left: auto; opacity: 0.8; }
+.ago-ai-close:hover { opacity: 1; }
+
+/* Messages */
+.ago-ai-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.ago-ai-msg { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.5; word-break: break-word; }
+.ago-ai-msg.user { align-self: flex-end; color: #fff; border-bottom-right-radius: 4px; }
+.ago-ai-msg.bot { align-self: flex-start; background: #f0f0f1; color: #1d2327; border-bottom-left-radius: 4px; }
+.ago-ai-msg.thinking { color: #999; font-style: italic; }
+
+/* Input */
+.ago-ai-input-area { padding: 12px 16px; border-top: 1px solid #eee; display: flex; gap: 8px; }
+.ago-ai-input { flex: 1; border: 1px solid #dcdcde; border-radius: 20px; padding: 8px 16px; font-size: 14px; outline: none; font-family: inherit; }
+.ago-ai-input:focus { border-color: #2271b1; }
+.ago-ai-send { border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
+.ago-ai-send:hover { opacity: 0.9; }
+.ago-ai-send svg { width: 18px; height: 18px; fill: #fff; }
+
+/* Markdown in bot messages */
+.ago-ai-msg.bot strong { font-weight: 600; }
+.ago-ai-msg.bot em { font-style: italic; }
+.ago-ai-msg.bot ul { margin: 4px 0; padding-left: 18px; }
+.ago-ai-msg.bot li { margin: 2px 0; }
+.ago-ai-msg.bot a { color: #2271b1; text-decoration: underline; }
+
+/* Task form (lead capture) */
+.ago-ai-task-form { padding: 12px; background: #f9f9f9; border-radius: 10px; margin-top: 8px; }
+.ago-ai-task-form h4 { margin: 0 0 8px; font-size: 14px; }
+.ago-ai-task-form input, .ago-ai-task-form textarea { width: 100%; box-sizing: border-box; border: 1px solid #dcdcde; border-radius: 6px; padding: 6px 10px; font-size: 13px; margin-bottom: 6px; font-family: inherit; }
+.ago-ai-task-form button { width: 100%; padding: 8px; border: none; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; }
+.ago-ai-task-sent { text-align: center; color: #00a32a; font-size: 13px; padding: 10px; }
+
+/* Powered by */
+.ago-ai-powered { text-align: center; padding: 4px; font-size: 10px; color: #999; }
+.ago-ai-powered a { color: #999; text-decoration: none; }
+
+@media (max-width: 480px) {
+    .ago-ai-window { width: 100%; max-width: 100%; bottom: 0; right: 0; left: 0; height: 100vh; max-height: 100vh; border-radius: 0; }
+    .ago-ai-toggle { bottom: 16px; }
+}
