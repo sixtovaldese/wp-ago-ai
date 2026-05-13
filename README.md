@@ -54,9 +54,27 @@ The floating widget appears on the frontend immediately.
 
 Google Gemini terms: [ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms). Google privacy policy: [policies.google.com/privacy](https://policies.google.com/privacy).
 
-## Pro version
+## Pro version — Lifetime License
 
-A paid Pro version is available at [store.ago.cl](https://store.ago.cl) with extra features for teams that need them: unlimited daily chats, unlimited knowledge files, full conversation history, lead capture and task panel, WhatsApp button. The Pro is a separate plugin and is **not required** for this Lite version to be fully functional. Buy it only if you outgrow the free version.
+There is a paid Pro version for teams that outgrow the free Lite. It is a separate plugin, **not required** for this one to work, and it ships with a **lifetime license** (pay once, use forever, lifetime updates, up to 3 sites per license).
+
+What you get extra in Pro:
+
+| Feature | Lite (this repo) | Pro |
+|---|---|---|
+| Daily chats per visitor | 50 | Unlimited |
+| Knowledge files | 1 | Unlimited |
+| Conversation history | — | ✓ |
+| Lead capture + task panel | — | ✓ |
+| WhatsApp button | — | ✓ |
+| Max messages per conversation | — | ✓ Configurable |
+| "Powered by aGo" badge | Visible | Hidden |
+| Sites per license | — | 3 |
+| Price | Free | US$29.90 one-time |
+
+👉 **Get the Pro Lifetime License at [store.ago.cl](https://store.ago.cl)**
+
+After purchase you receive a license key by email. Paste it in the Pro plugin and every feature unlocks. Your settings, files and conversations from the Lite are preserved when you switch.
 
 ## Contributing
 
@@ -131,9 +149,27 @@ El widget flotante aparece en el frontend al instante.
 
 Términos de Google Gemini: [ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms). Política de privacidad de Google: [policies.google.com/privacy](https://policies.google.com/privacy).
 
-## Versión Pro
+## Versión Pro — Licencia Lifetime
 
-Hay una versión Pro de pago en [store.ago.cl](https://store.ago.cl) con funciones extra para quienes las necesitan: chats diarios ilimitados, archivos de conocimiento ilimitados, historial de conversaciones, captura de leads con panel de tareas, botón de WhatsApp. El Pro es un plugin separado y **no es necesario** para que esta versión Lite funcione completa. Solo compra el Pro si te quedas corto con la versión gratis.
+Existe una versión Pro de pago para quienes se queden cortos con la Lite. Es un plugin separado, **no es necesario** para que esta funcione, y viene con **licencia de por vida** (pago único, uso para siempre, actualizaciones de por vida, hasta 3 sitios por licencia).
+
+Lo que sumas al pasar a Pro:
+
+| Función | Lite (este repo) | Pro |
+|---|---|---|
+| Chats diarios por visitante | 50 | Ilimitados |
+| Archivos en base de conocimiento | 1 | Ilimitados |
+| Historial de conversaciones | — | ✓ |
+| Captura de leads y panel de tareas | — | ✓ |
+| Botón de WhatsApp | — | ✓ |
+| Máx. mensajes por conversación | — | ✓ Configurable |
+| Insignia "Powered by aGo" | Visible | Oculta |
+| Sitios por licencia | — | 3 |
+| Precio | Gratis | US$29,90 pago único |
+
+👉 **Obtén la Lifetime License en [store.ago.cl](https://store.ago.cl)**
+
+Al comprar recibes la license key por email. La pegas en el plugin Pro y se desbloquea todo. Los settings, archivos y conversaciones de la Lite se conservan al hacer el cambio.
 
 ## Contribuir
 
