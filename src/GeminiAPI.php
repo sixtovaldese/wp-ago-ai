@@ -289,9 +289,9 @@ class GeminiAPI {
             $parts[] = $settings['system_prompt'];
         }
 
-        $parts[] = "CONTACT REQUESTS: If the user asks to talk to a human, requests a phone number, WhatsApp, email, or any form of direct contact, respond with a brief friendly message like \"Sure! Let me connect you with our team 😊\" and add [CANT_HELP] at the end. This will automatically show them a contact form.";
+        $parts[] = 'If a user asks to contact a human, suggest they use the contact options visible on this site (phone, email, contact form) and stay friendly.';
 
-        $parts[] = "CANT_HELP MARKER: If you genuinely cannot find the answer in your knowledge files, respond with what you DO know and add [CANT_HELP] at the very end of your message. The user won't see this marker — it triggers a contact form automatically. Never invent information.";
+        $parts[] = 'If you cannot find the answer in your knowledge files, say so honestly and suggest they reach out through the site contact options. Never invent information.';
 
         $parts[] = 'Always respond in the same language the user writes in.';
         $parts[] = 'Keep responses concise — aim for 2-4 short paragraphs maximum unless the user asks for detail.';

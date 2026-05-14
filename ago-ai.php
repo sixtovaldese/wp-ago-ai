@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name:       aGo AI Chatbot
- * Plugin URI:        https://ago.cl/herramientas/wordpress/ago-ai-chat
- * Description:       AI chatbot for WordPress powered by Google Gemini. Upload your knowledge files, configure the bot personality, capture leads automatically.
- * Version:           1.0.0
+ * Plugin Name:       aGo AI Chatbot – Free AI Chat Widget
+ * Plugin URI:        https://ago.cl/herramientas/wordpress/ago-ai-chat/docs/
+ * Description:       Free AI chat widget for WordPress. Upload your knowledge files (PDF, TXT, CSV, MD, JSON) and the AI answers visitor questions using your own content. Powered by Google Gemini. Fully functional, no built-in limits, no signup.
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      8.1
  * Author:            aGo Lab
  * Author URI:        https://ago.cl
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       ago-ai
+ * Text Domain:       ago-ai-chatbot
  * Domain Path:       /languages
  */
 
@@ -27,13 +27,13 @@ if ( $ago_ai_pro_active ) {
     add_action( 'admin_notices', function () {
         if ( ! current_user_can( 'activate_plugins' ) ) return;
         echo '<div class="notice notice-info is-dismissible"><p><strong>aGo AI Chatbot</strong>: ';
-        echo esc_html__( 'aGo AI Chatbot Pro is active on this site and replaces this free version. You can safely deactivate and delete "aGo AI Chatbot" from the Plugins page. Your settings, files and conversations are preserved.', 'ago-ai' );
+        echo esc_html__( 'aGo AI Chatbot Pro is active on this site and replaces this free version. You can safely deactivate and delete "aGo AI Chatbot" from the Plugins page. Your settings, files and conversations are preserved.', 'ago-ai-chatbot' );
         echo '</p></div>';
     });
     return;
 }
 
-defined( 'AGO_AI_VERSION' ) || define( 'AGO_AI_VERSION', '1.0.0' );
+defined( 'AGO_AI_VERSION' ) || define( 'AGO_AI_VERSION', '1.1.0' );
 defined( 'AGO_AI_FILE' )    || define( 'AGO_AI_FILE', __FILE__ );
 defined( 'AGO_AI_PATH' )    || define( 'AGO_AI_PATH', plugin_dir_path( __FILE__ ) );
 defined( 'AGO_AI_URL' )     || define( 'AGO_AI_URL', plugin_dir_url( __FILE__ ) );

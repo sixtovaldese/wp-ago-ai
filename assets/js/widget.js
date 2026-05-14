@@ -15,7 +15,7 @@
     var conversationId = null;
     var history = [];
     var iterationCount = 0;
-    var maxIterations = cfg.premium ? (cfg.maxIterations || 20) : 20;
+    var maxIterations = cfg.maxIterations || 20;
 
     render();
 
@@ -86,13 +86,9 @@
         .then(function (res) {
             thinkingEl.remove();
 
-            // API error (rate limit, daily limit, etc)
+            // API error (rate limit anti-abuse, etc)
             if (res.error && !res.text) {
-                if (res.upgrade) {
-                    addBotMessage((i18n.dailyLimit || res.error) + '\n' + (i18n.upgrade || ''));
-                } else {
-                    addBotMessage(i18n.error || res.error || 'Error');
-                }
+                addBotMessage(i18n.rateLimit && res.error.indexOf('Too many') === 0 ? i18n.rateLimit : (i18n.error || res.error || 'Error'));
                 return;
             }
 
