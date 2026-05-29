@@ -3,8 +3,8 @@
     'use strict';
     var $ = document.querySelector.bind(document);
     var $$ = document.querySelectorAll.bind(document);
-    var restUrl = (window.agoAI || {}).restUrl || '';
-    var nonce = (window.agoAI || {}).nonce || '';
+    var restUrl = (window.agoaichatAdmin || {}).restUrl || '';
+    var nonce = (window.agoaichatAdmin || {}).nonce || '';
 
     /* ───── Settings Page ───── */
     var saveBtn = $('#ago-save-settings');
@@ -25,7 +25,7 @@
                 max_input_tokens: parseInt(($('#ago-max-input-tokens') || {}).value || '1000', 10),
                 max_output_tokens: parseInt(($('#ago-max-output-tokens') || {}).value || '1000', 10),
                 response_style: ($('#ago-response-style') || {}).value || 'friendly_emoji',
-                rate_limit: parseInt(($('#ago-rate-limit') || {}).value || '30', 10),
+                rate_limit_per_minute: parseInt(($('#ago-rate-limit') || {}).value || '60', 10),
             };
             saveBtn.disabled = true; saveBtn.textContent = 'Saving...';
             fetch(restUrl + '/settings', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce }, body: JSON.stringify(data) })
@@ -57,7 +57,7 @@
         if (avatarRemove) {
             avatarRemove.addEventListener('click', function () {
                 $('#ago-avatar-url').value = '';
-                $('#ago-avatar-preview').src = (window.agoAI && agoAI.settings ? '' : '') || '';
+                $('#ago-avatar-preview').src = '';
                 avatarRemove.style.display = 'none';
             });
         }
@@ -84,7 +84,7 @@
                 models.forEach(function (m) {
                     var opt = document.createElement('option');
                     opt.value = m.id;
-                    opt.textContent = m.label + ' — ' + m.tier;
+                    opt.textContent = m.label + ', ' + m.tier;
                     if (m.id === currentVal) opt.selected = true;
                     select.appendChild(opt);
                 });

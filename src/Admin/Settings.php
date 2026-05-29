@@ -1,8 +1,8 @@
 <?php
 
-namespace AgoLab\AI\Admin;
+namespace AgoLab\AIChatbot\Admin;
 
-use AgoLab\AI\Plugin;
+use AgoLab\AIChatbot\Plugin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,13 +10,13 @@ class Settings {
 
     public static function render(): void {
         $settings = Plugin::get_settings();
-        $files = get_option( 'ago_ai_files', [] );
+        $files = get_option( 'agoaichat_files', [] );
         ?>
         <div class="wrap">
             <h1>
-                <img src="<?php echo esc_url( AGO_AI_URL . 'assets/img/agolab.webp' ); ?>" alt="aGo Lab" style="height:28px;width:auto;vertical-align:middle;margin-right:8px">
+                <img src="<?php echo esc_url( AGOAICHAT_URL . 'assets/img/agolab.webp' ); ?>" alt="aGo Lab" style="height:28px;width:auto;vertical-align:middle;margin-right:8px">
                 <?php esc_html_e( 'aGo AI', 'ago-ai-chatbot' ); ?>
-                <span style="font-size:12px;color:#999;margin-left:8px">v<?php echo esc_html( AGO_AI_VERSION ); ?></span>
+                <span style="font-size:12px;color:#999;margin-left:8px">v<?php echo esc_html( AGOAICHAT_VERSION ); ?></span>
             </h1>
 
             <div class="ago-layout">
@@ -93,7 +93,7 @@ class Settings {
                                 <th><?php esc_html_e( 'Avatar', 'ago-ai-chatbot' ); ?></th>
                                 <td>
                                     <div style="display:flex;align-items:center;gap:12px">
-                                        <img id="ago-avatar-preview" src="<?php echo esc_url( $settings['avatar_url'] ?: AGO_AI_URL . 'assets/img/bot-avatar.svg' ); ?>" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #dcdcde">
+                                        <img id="ago-avatar-preview" src="<?php echo esc_url( $settings['avatar_url'] ?: AGOAICHAT_URL . 'assets/img/bot-avatar.svg' ); ?>" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #dcdcde">
                                         <div>
                                             <input type="hidden" id="ago-avatar-url" value="<?php echo esc_attr( $settings['avatar_url'] ); ?>">
                                             <button id="ago-avatar-upload" class="button"><?php esc_html_e( 'Upload Image', 'ago-ai-chatbot' ); ?></button>
@@ -176,7 +176,7 @@ class Settings {
                             </tr>
                             <tr>
                                 <th><?php esc_html_e( 'Rate Limit', 'ago-ai-chatbot' ); ?></th>
-                                <td><input type="number" id="ago-rate-limit" value="<?php echo (int) $settings['rate_limit']; ?>" min="1" max="500" style="width:70px"> <span class="description"><?php esc_html_e( 'messages per hour per IP', 'ago-ai-chatbot' ); ?></span></td>
+                                <td><input type="number" id="ago-rate-limit" value="<?php echo (int) ( $settings['rate_limit_per_minute'] ?? 60 ); ?>" min="10" max="600" style="width:70px"> <span class="description"><?php esc_html_e( 'messages per minute per IP', 'ago-ai-chatbot' ); ?></span></td>
                             </tr>
                         </table>
                     </div>
@@ -231,7 +231,7 @@ class Settings {
                     </div>
                     <div class="ago-footer">
                         <a href="https://ago.cl" target="_blank" rel="noopener" class="ago-footer-logo">
-                            <img src="<?php echo esc_url( AGO_AI_URL . 'assets/img/agolab.webp' ); ?>" alt="aGo Lab" style="height:40px;width:auto">
+                            <img src="<?php echo esc_url( AGOAICHAT_URL . 'assets/img/agolab.webp' ); ?>" alt="aGo Lab" style="height:40px;width:auto">
                         </a>
                         <p><?php echo wp_kses_post( sprintf(
                             /* translators: 1: heart icon HTML, 2: aGo Lab link HTML */

@@ -1,4 +1,4 @@
-/* aGo AI — Admin CSS */
+/* aGo AI, Admin CSS */
 .ago-layout { display: flex; gap: 20px; margin-top: 20px; }
 .ago-main { flex: 1; max-width: 680px; }
 .ago-sidebar { width: 280px; flex-shrink: 0; }

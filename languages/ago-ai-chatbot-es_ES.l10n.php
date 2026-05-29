@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 return ['x-generator'=>'aGo AI','translation-revision-date'=>'2026-03-17','plural-forms'=>'nplurals=2; plural=n != 1;','project-id-version'=>'aGo AI 1.0.0','language'=>'es','messages'=>[
 'aGo Tools'=>'aGo Herramientas',
 'aGo AI'=>'aGo AI',
@@ -46,7 +48,7 @@ return ['x-generator'=>'aGo AI','translation-revision-date'=>'2026-03-17','plura
 'No files uploaded yet.'=>'No hay archivos subidos aun.',
 'Limits & Notifications'=>'Limites y Notificaciones',
 'Rate Limit'=>'Limite de Mensajes',
-'messages per hour per IP'=>'mensajes por hora por IP',
+'messages per minute per IP'=>'mensajes por minuto por IP',
 'Notification Email'=>'Email de Notificacion',
 'Save Settings'=>'Guardar Configuracion',
 'About'=>'Acerca de',
@@ -159,4 +161,21 @@ return ['x-generator'=>'aGo AI','translation-revision-date'=>'2026-03-17','plura
 'Obtener Lifetime License'=>'Obtener Lifetime License',
 'Pago unico, actualizaciones de por vida, 3 sitios.'=>'Pago unico, actualizaciones de por vida, 3 sitios.',
 'Premium activo: chats ilimitados, archivos ilimitados, historial, leads y WhatsApp habilitados.'=>'Premium activo: chats ilimitados, archivos ilimitados, historial, leads y WhatsApp habilitados.',
+'aGo AI Chatbot'=>'aGo AI Chatbot',
+'AI chatbot powered by Google Gemini. Upload knowledge files, customize the personality, and chat with your visitors. Free and fully functional, no built-in limits.'=>'Chatbot con IA de Google Gemini. Sube archivos de conocimiento, personaliza la personalidad y conversa con tus visitantes. Gratis y totalmente funcional, sin límites incorporados.',
+'Unlimited knowledge files (PDF, TXT, CSV, MD, JSON)'=>'Archivos de conocimiento ilimitados (PDF, TXT, CSV, MD, JSON)',
+'Anti-abuse rate limit (configurable)'=>'Límite anti abuso configurable',
+'Additional features available'=>'Funciones adicionales disponibles',
+'A separate companion product, distributed outside WordPress.org, adds capabilities that are not part of this plugin:'=>'Un producto complementario aparte, distribuido fuera de WordPress.org, agrega capacidades que no forman parte de este plugin:',
+'Conversation history and search'=>'Historial de conversaciones y búsqueda',
+'Lead capture form inside chat'=>'Formulario de captura de leads dentro del chat',
+'Task engine (bot creates tasks)'=>'Motor de tareas (el bot crea tareas)',
+'Multi-provider with failover (OpenAI, Anthropic, Groq)'=>'Múltiples proveedores con conmutación por error (OpenAI, Anthropic, Groq)',
+'Analytics dashboard'=>'Panel de analíticas',
+'Voice input and synthesis'=>'Entrada y síntesis de voz',
+'Handoff to human (Email, Slack, Telegram)'=>'Derivación a un humano (Email, Slack, Telegram)',
+'WooCommerce product knowledge'=>'Conocimiento de productos WooCommerce',
+'White-label widget'=>'Widget de marca blanca',
+'Learn more'=>'Más información',
+'Too many messages in a short time. Please wait a moment and try again.'=>'Demasiados mensajes en poco tiempo. Espera un momento e inténtalo de nuevo.',
 ]];

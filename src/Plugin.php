@@ -1,6 +1,6 @@
 <?php
 
-namespace AgoLab\AI;
+namespace AgoLab\AIChatbot;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,30 +23,30 @@ class Plugin {
     }
 
     public function load_textdomain(): void {
-        load_plugin_textdomain( 'ago-ai-chatbot', false, dirname( plugin_basename( AGO_AI_FILE ) ) . '/languages' );
+        load_plugin_textdomain( 'ago-ai-chatbot', false, dirname( plugin_basename( AGOAICHAT_FILE ) ) . '/languages' );
     }
 
     /* ───── Admin Menu ───── */
 
     public function admin_menu(): void {
-        if ( empty( $GLOBALS['admin_page_hooks']['ago-tools'] ) ) {
-            add_menu_page( __( 'aGo Tools', 'ago-ai-chatbot' ), __( 'aGo Tools', 'ago-ai-chatbot' ), 'manage_options', 'ago-tools', '__return_null', 'dashicons-hammer', 81 );
+        if ( empty( $GLOBALS['admin_page_hooks']['agolab-tools'] ) ) {
+            add_menu_page( __( 'aGo Tools', 'ago-ai-chatbot' ), __( 'aGo Tools', 'ago-ai-chatbot' ), 'manage_options', 'agolab-tools', '__return_null', 'dashicons-hammer', 81 );
         }
 
-        add_submenu_page( 'ago-tools', __( 'aGo AI Chatbot', 'ago-ai-chatbot' ), __( 'AI Chatbot', 'ago-ai-chatbot' ), 'manage_options', 'ago-ai', [ Admin\Settings::class, 'render' ] );
+        add_submenu_page( 'agolab-tools', __( 'aGo AI Chatbot', 'ago-ai-chatbot' ), __( 'AI Chatbot', 'ago-ai-chatbot' ), 'manage_options', 'agoaichat', [ Admin\Settings::class, 'render' ] );
 
-        remove_submenu_page( 'ago-tools', 'ago-tools' );
+        remove_submenu_page( 'agolab-tools', 'agolab-tools' );
     }
 
     /* ───── Assets ───── */
 
     public function admin_assets( string $hook ): void {
-        if ( ! str_ends_with( $hook, '_page_ago-ai' ) ) return;
+        if ( ! str_ends_with( $hook, '_page_agoaichat' ) ) return;
         wp_enqueue_media();
-        wp_enqueue_style( 'ago-ai-admin', AGO_AI_URL . 'assets/css/admin.css', [], AGO_AI_VERSION );
-        wp_enqueue_script( 'ago-ai-admin', AGO_AI_URL . 'assets/js/admin.js', [], AGO_AI_VERSION, true );
-        wp_localize_script( 'ago-ai-admin', 'agoAI', [
-            'restUrl'  => rest_url( 'ago-ai/v1' ),
+        wp_enqueue_style( 'agoaichat-admin', AGOAICHAT_URL . 'assets/css/admin.css', [], AGOAICHAT_VERSION );
+        wp_enqueue_script( 'agoaichat-admin', AGOAICHAT_URL . 'assets/js/admin.js', [], AGOAICHAT_VERSION, true );
+        wp_localize_script( 'agoaichat-admin', 'agoaichatAdmin', [
+            'restUrl'  => rest_url( 'ago-ai-chatbot/v1' ),
             'nonce'    => wp_create_nonce( 'wp_rest' ),
             'settings' => self::get_settings(),
         ] );
@@ -56,13 +56,13 @@ class Plugin {
         $s = self::get_settings();
         if ( empty( $s['enabled'] ) || empty( $s['api_key'] ) ) return;
 
-        wp_enqueue_style( 'ago-ai-widget', AGO_AI_URL . 'assets/css/widget.css', [], AGO_AI_VERSION );
-        wp_enqueue_script( 'ago-ai-widget', AGO_AI_URL . 'assets/js/widget.js', [], AGO_AI_VERSION, true );
-        wp_localize_script( 'ago-ai-widget', 'agoAIWidget', [
-            'restUrl'   => rest_url( 'ago-ai/v1' ),
+        wp_enqueue_style( 'agoaichat-widget', AGOAICHAT_URL . 'assets/css/widget.css', [], AGOAICHAT_VERSION );
+        wp_enqueue_script( 'agoaichat-widget', AGOAICHAT_URL . 'assets/js/widget.js', [], AGOAICHAT_VERSION, true );
+        wp_localize_script( 'agoaichat-widget', 'agoaichatWidget', [
+            'restUrl'   => rest_url( 'ago-ai-chatbot/v1' ),
             'nonce'     => wp_create_nonce( 'wp_rest' ),
             'botName'   => $s['bot_name'] ?: __( 'Assistant', 'ago-ai-chatbot' ),
-            'avatarUrl' => $s['avatar_url'] ?: AGO_AI_URL . 'assets/img/bot-avatar.svg',
+            'avatarUrl' => $s['avatar_url'] ?: AGOAICHAT_URL . 'assets/img/bot-avatar.svg',
             'welcomeMsg'=> $s['welcome_message'] ?: __( 'Hi! How can I help you?', 'ago-ai-chatbot' ),
             'maxIterations' => 20,
             'position'  => $s['widget_position'] ?? 'right',
@@ -89,13 +89,16 @@ class Plugin {
     /* ───── REST API ───── */
 
     public function register_routes(): void {
-        $ns = 'ago-ai/v1';
+        $ns = 'ago-ai-chatbot/v1';
 
         register_rest_route( $ns, '/settings', [
             [ 'methods' => 'GET', 'callback' => [ $this, 'rest_get_settings' ], 'permission_callback' => [ $this, 'can_manage' ] ],
             [ 'methods' => 'POST', 'callback' => [ $this, 'rest_save_settings' ], 'permission_callback' => [ $this, 'can_manage' ] ],
         ] );
 
+        /* Public by design: the chat widget serves anonymous front-end visitors,
+         * so this endpoint cannot require authentication. Access is gated inside
+         * the callback (chat must be enabled) and throttled per IP. */
         register_rest_route( $ns, '/chat', [
             'methods' => 'POST', 'callback' => [ $this, 'rest_chat' ], 'permission_callback' => '__return_true',
         ] );
@@ -132,10 +135,10 @@ class Plugin {
         $settings = self::sanitize_settings( $data );
         // Don't overwrite API key if masked
         if ( $settings['api_key'] === '********' ) {
-            $old = get_option( 'ago_ai_settings', [] );
+            $old = get_option( 'agoaichat_settings', [] );
             $settings['api_key'] = $old['api_key'] ?? '';
         }
-        update_option( 'ago_ai_settings', $settings );
+        update_option( 'agoaichat_settings', $settings );
         $settings['api_key'] = $settings['api_key'] ? '********' : '';
         return new \WP_REST_Response( [ 'saved' => true, 'settings' => $settings ] );
     }
@@ -146,14 +149,19 @@ class Plugin {
         $data     = $request->get_json_params();
         $settings = self::get_settings();
 
+        // Gate: the widget must be enabled and configured before proxying any request.
+        if ( empty( $settings['enabled'] ) ) {
+            return new \WP_REST_Response( [ 'error' => 'Chat is not enabled' ], 403 );
+        }
+
         if ( empty( $settings['api_key'] ) ) {
             return new \WP_REST_Response( [ 'error' => 'API key not configured' ], 500 );
         }
 
         // Anti-abuse rate limit per IP per minute (NOT a feature gating limit).
         // Plugin Lite has NO chat usage caps. This only prevents flood from one IP.
-        $ip       = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-        $rate_key = 'ago_ai_rate_' . md5( $ip );
+        $ip       = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '0.0.0.0';
+        $rate_key = 'agoaichat_rate_' . md5( $ip );
         $count    = (int) get_transient( $rate_key );
         $limit    = max( 1, (int) ( $settings['rate_limit_per_minute'] ?? 60 ) );
         if ( $count >= $limit ) {
@@ -197,7 +205,7 @@ class Plugin {
         }
 
         // Ensure File Search Store exists
-        $store_name = get_option( 'ago_ai_store_name', '' );
+        $store_name = get_option( 'agoaichat_store_name', '' );
         if ( ! $store_name ) {
             $site_slug = sanitize_title( get_bloginfo( 'name' ) ) ?: 'ago-ai-chatbot';
             $store_result = GeminiAPI::create_store( $settings['api_key'], 'ago-ai-' . $site_slug );
@@ -205,7 +213,7 @@ class Plugin {
                 return new \WP_REST_Response( [ 'error' => 'Store creation failed: ' . $store_result['error'] ], 500 );
             }
             $store_name = $store_result['name'];
-            update_option( 'ago_ai_store_name', $store_name );
+            update_option( 'agoaichat_store_name', $store_name );
         }
 
         $result = GeminiAPI::upload_to_store( $settings['api_key'], $store_name, $file['tmp_name'], $file['name'], $file['type'] );
@@ -214,7 +222,7 @@ class Plugin {
             return new \WP_REST_Response( [ 'error' => $result['error'] ], 500 );
         }
 
-        $saved_files = get_option( 'ago_ai_files', [] );
+        $saved_files = get_option( 'agoaichat_files', [] );
         $saved_files[] = [
             'name'         => $result['name'],
             'display_name' => $file['name'],
@@ -224,15 +232,15 @@ class Plugin {
             'in_store'     => true,
             'uploaded_at'  => current_time( 'mysql' ),
         ];
-        update_option( 'ago_ai_files', $saved_files );
+        update_option( 'agoaichat_files', $saved_files );
 
         return new \WP_REST_Response( [ 'ok' => true, 'file' => end( $saved_files ), 'store' => $store_name ] );
     }
 
     public function rest_list_files(): \WP_REST_Response {
         return new \WP_REST_Response( [
-            'files' => get_option( 'ago_ai_files', [] ),
-            'store' => get_option( 'ago_ai_store_name', '' ),
+            'files' => get_option( 'agoaichat_files', [] ),
+            'store' => get_option( 'agoaichat_store_name', '' ),
         ] );
     }
 
@@ -242,15 +250,15 @@ class Plugin {
 
         GeminiAPI::delete_file( $settings['api_key'], $name );
 
-        $files = get_option( 'ago_ai_files', [] );
+        $files = get_option( 'agoaichat_files', [] );
         $files = array_filter( $files, fn( $f ) => $f['name'] !== $name );
-        update_option( 'ago_ai_files', array_values( $files ) );
+        update_option( 'agoaichat_files', array_values( $files ) );
 
         if ( empty( $files ) ) {
-            $store_name = get_option( 'ago_ai_store_name', '' );
+            $store_name = get_option( 'agoaichat_store_name', '' );
             if ( $store_name ) {
                 GeminiAPI::delete_store( $settings['api_key'], $store_name );
-                delete_option( 'ago_ai_store_name' );
+                delete_option( 'agoaichat_store_name' );
             }
         }
 
@@ -283,7 +291,7 @@ class Plugin {
             'max_output_tokens'     => 1000,
             'response_style'        => 'friendly_emoji',
         ];
-        return wp_parse_args( get_option( 'ago_ai_settings', [] ), $defaults );
+        return wp_parse_args( get_option( 'agoaichat_settings', [] ), $defaults );
     }
 
     private static function sanitize_settings( array $d ): array {

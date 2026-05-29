@@ -1,6 +1,6 @@
 <?php
 
-namespace AgoLab\AI;
+namespace AgoLab\AIChatbot;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,12 +38,12 @@ class GeminiAPI {
         ];
 
         // Use File Search Store if available (cheaper: only relevant fragments)
-        $store_name = get_option( 'ago_ai_store_name', '' );
+        $store_name = get_option( 'agoaichat_store_name', '' );
         if ( $store_name ) {
             $body['tools'] = [ [ 'fileSearch' => [ 'fileSearchStoreNames' => [ $store_name ] ] ] ];
         } else {
             // Fallback: attach files directly (sends entire file each time = expensive)
-            $files = get_option( 'ago_ai_files', [] );
+            $files = get_option( 'agoaichat_files', [] );
             if ( $files ) {
                 $file_parts = [];
                 foreach ( $files as $file ) {
@@ -294,7 +294,7 @@ class GeminiAPI {
         $parts[] = 'If you cannot find the answer in your knowledge files, say so honestly and suggest they reach out through the site contact options. Never invent information.';
 
         $parts[] = 'Always respond in the same language the user writes in.';
-        $parts[] = 'Keep responses concise — aim for 2-4 short paragraphs maximum unless the user asks for detail.';
+        $parts[] = 'Keep responses concise, aim for 2-4 short paragraphs maximum unless the user asks for detail.';
         $parts[] = 'NEVER discuss your own errors, limitations, or technical issues. If the user mentions something "went wrong", apologize briefly and ask how you can help with ' . $site_name . ' services.';
 
         return implode( "\n\n", $parts );

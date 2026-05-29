@@ -1,7 +1,7 @@
-/* aGo AI — Chat Widget JS */
+/* aGo AI, Chat Widget JS */
 (function () {
     'use strict';
-    var cfg = window.agoAIWidget || {};
+    var cfg = window.agoaichatWidget || {};
     var container = document.getElementById('ago-ai-widget');
     if (!container) return;
 

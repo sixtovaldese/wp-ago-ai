@@ -1,11 +1,11 @@
-=== aGo AI Chatbot – Free AI Chat Widget ===
-Contributors: agolab
+=== aGo AI Chatbot, AI Chat Widget with Knowledge Base ===
+Contributors: sixtovaldese
 Donate link: https://paypal.me/sixtovaldes
 Tags: ai chatbot, ai chat, chat widget, customer support, ai assistant
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,12 +28,12 @@ Free AI chat widget for WordPress powered by Google Gemini. Upload your knowledg
 = Core features =
 
 * **AI chat widget** in any page (configurable position: left/right, vertical offset to avoid clashing with floating buttons).
-* **Knowledge base from your own files** — PDF, TXT, CSV, Markdown, JSON. **Unlimited** uploads.
-* **Configurable bot identity** — name, welcome message, tone (friendly / professional / casual / formal), response style, avatar.
+* **Knowledge base from your own files**, PDF, TXT, CSV, Markdown, JSON. **Unlimited** uploads.
+* **Configurable bot identity**, name, welcome message, tone (friendly / professional / casual / formal), response style, avatar.
 * **System prompt** for fine-grained instructions (industry, audience, rules).
-* **Google Gemini File Search Store** under the hood — documents are indexed once, only the relevant fragments are sent to the model, keeping your API cost low.
+* **Google Gemini File Search Store** under the hood, documents are indexed once, only the relevant fragments are sent to the model, keeping your API cost low.
 * **Anti-abuse rate limit** per IP (default 60 messages/minute, configurable) to protect your Gemini quota from automated flooding.
-* **Works with every page builder**: Elementor, Divi, Bricks, Gutenberg, classic — the widget is rendered via `wp_footer` regardless of the theme.
+* **Works with every page builder**: Elementor, Divi, Bricks, Gutenberg, classic, the widget is rendered via `wp_footer` regardless of the theme.
 
 = Use cases =
 
@@ -117,7 +117,7 @@ Yes. The widget is rendered via `wp_footer`, independent of the theme or page bu
 
 = Can I customize the look of the widget? =
 
-Yes — position (left/right), vertical offset (3 levels), primary color, bot avatar, welcome message and bot name.
+Yes, position (left/right), vertical offset (3 levels), primary color, bot avatar, welcome message and bot name.
 
 = Can I disable the floating widget on specific pages? =
 
@@ -144,6 +144,13 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 
 == Changelog ==
 
+= 1.2.0 =
+* Prefixed all internal identifiers with `agoaichat` / `AGOAICHAT_` and namespace `AgoLab\AIChatbot` to avoid conflicts with other plugins.
+* REST namespace renamed to `ago-ai-chatbot/v1`.
+* The public chat endpoint now verifies the widget is enabled before proxying any request.
+* Removed "Free" from the plugin display name.
+* Fixed the rate limit field in settings (now correctly reads and saves messages per minute).
+
 = 1.1.0 =
 * Removed all built-in usage caps. Plugin is now fully functional without restrictions.
 * Removed daily chat limit and file count limit. Knowledge files are now unlimited.
@@ -163,5 +170,8 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 
 == Upgrade Notice ==
 
+= 1.2.0 =
+Unique internal prefixes, hardened public chat endpoint, and naming fixes required for WordPress.org compliance.
+
 = 1.1.0 =
-Free and fully functional, no built-in limits. Renamed text domain to match the plugin slug. Required for WordPress.org compliance.
+Fully functional, no built-in limits. Renamed text domain to match the plugin slug. Required for WordPress.org compliance.
