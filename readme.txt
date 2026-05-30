@@ -137,10 +137,8 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 
 == Screenshots ==
 
-1. The floating AI chat widget on a WordPress site.
-2. Admin settings: general configuration, bot personality, knowledge base.
-3. Knowledge file upload (PDF, TXT, CSV, MD, JSON).
-4. Widget appearance: position, color, avatar.
+1. Admin settings: general configuration, model selection, bot personality and knowledge base.
+2. The AI chat widget answering a visitor question on the site.
 
 == Changelog ==
 
