@@ -228,35 +228,73 @@ class GeminiAPI {
     /* ───── Models ───── */
 
     /**
-     * Get available flash models. Sorted cheapest first.
+     * Cheap key check against the models endpoint before persisting it.
+     */
+    public static function validate_key( string $api_key ): array {
+        $response = wp_remote_get( self::BASE_URL . '/models?pageSize=1', [
+            'headers' => [ 'x-goog-api-key' => $api_key ],
+            'timeout' => 15,
+        ] );
+
+        if ( is_wp_error( $response ) ) {
+            return [ 'ok' => false, 'error' => $response->get_error_message() ];
+        }
+
+        $code = wp_remote_retrieve_response_code( $response );
+        if ( $code !== 200 ) {
+            $data = json_decode( wp_remote_retrieve_body( $response ), true );
+            return [ 'ok' => false, 'error' => $data['error']['message'] ?? 'API error (HTTP ' . $code . ')' ];
+        }
+
+        return [ 'ok' => true ];
+    }
+
+    /**
+     * Get available text chat models (Lite, Flash, Pro). Sorted cheapest tier
+     * first, newest version first within each tier. Dynamic: any new Gemini
+     * model the API exposes appears without code changes.
      */
     public static function list_models( string $api_key ): array {
-        $response = wp_remote_get( self::BASE_URL . '/models?key=' . $api_key, [ 'timeout' => 15 ] );
+        $response = wp_remote_get( self::BASE_URL . '/models?pageSize=200&key=' . $api_key, [ 'timeout' => 15 ] );
         if ( is_wp_error( $response ) ) return [];
 
         $data = json_decode( wp_remote_retrieve_body( $response ), true );
 
-        $catalog = [
-            'gemini-2.5-flash-lite'         => [ 'order' => 1, 'label' => 'Flash Lite 2.5 (Cheapest)',  'tier' => 'Lowest cost' ],
-            'gemini-2.0-flash-lite'         => [ 'order' => 2, 'label' => 'Flash Lite 2.0',             'tier' => 'Lowest cost' ],
-            'gemini-3.1-flash-lite-preview' => [ 'order' => 3, 'label' => 'Flash Lite 3.1 (Preview)',   'tier' => 'Lowest cost' ],
-            'gemini-2.0-flash'              => [ 'order' => 4, 'label' => 'Flash 2.0',                  'tier' => 'Mid cost' ],
-            'gemini-2.5-flash'              => [ 'order' => 5, 'label' => 'Flash 2.5',                  'tier' => 'Mid cost, best quality' ],
-            'gemini-3-flash-preview'        => [ 'order' => 6, 'label' => 'Flash 3.0 (Preview)',         'tier' => 'Mid cost' ],
+        $tiers = [
+            'lite'  => [ 'order' => 1, 'tier' => 'Lowest cost' ],
+            'flash' => [ 'order' => 2, 'tier' => 'Mid cost' ],
+            'pro'   => [ 'order' => 3, 'tier' => 'Highest quality' ],
         ];
 
         $available = [];
         foreach ( $data['models'] ?? [] as $m ) {
             $name = str_replace( 'models/', '', $m['name'] );
-            if ( ! isset( $catalog[ $name ] ) ) continue;
-            $methods = $m['supportedGenerationMethods'] ?? [];
-            if ( ! in_array( 'generateContent', $methods, true ) ) continue;
 
-            $info = $catalog[ $name ];
-            $available[] = [ 'id' => $name, 'label' => $info['label'], 'tier' => $info['tier'], 'order' => $info['order'] ];
+            // Only Gemini text chat models. Non-conversational variants out.
+            if ( ! str_starts_with( $name, 'gemini-' ) ) continue;
+            if ( preg_match( '/(tts|image|audio|live|robotics|computer-use|embedding)/', $name ) ) continue;
+            if ( ! in_array( 'generateContent', $m['supportedGenerationMethods'] ?? [], true ) ) continue;
+
+            if ( str_contains( $name, 'lite' ) ) {
+                $group = 'lite';
+            } elseif ( str_contains( $name, 'flash' ) ) {
+                $group = 'flash';
+            } elseif ( str_contains( $name, 'pro' ) ) {
+                $group = 'pro';
+            } else {
+                continue;
+            }
+
+            $label = ucwords( str_replace( '-', ' ', preg_replace( '/^gemini-/', 'Gemini ', $name ) ) );
+            $available[] = [
+                'id'    => $name,
+                'label' => $label,
+                'tier'  => $tiers[ $group ]['tier'],
+                'order' => $tiers[ $group ]['order'],
+            ];
         }
 
-        usort( $available, fn( $a, $b ) => $a['order'] <=> $b['order'] );
+        usort( $available, fn( $a, $b ) => [ $a['order'], $b['id'] ] <=> [ $b['order'], $a['id'] ] );
         return $available;
     }
 

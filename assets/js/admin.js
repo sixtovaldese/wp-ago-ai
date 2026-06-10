@@ -30,7 +30,7 @@
             saveBtn.disabled = true; saveBtn.textContent = 'Saving...';
             fetch(restUrl + '/settings', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce }, body: JSON.stringify(data) })
             .then(function (r) { return r.json(); })
-            .then(function (res) { showStatus(res.saved ? 'success' : 'error', res.saved ? 'Settings saved.' : 'Error.'); })
+            .then(function (res) { showStatus(res.saved ? 'success' : 'error', res.saved ? 'Settings saved.' : (res.error || 'Error.')); })
             .catch(function (e) { showStatus('error', e.message); })
             .finally(function () { saveBtn.disabled = false; saveBtn.textContent = 'Save Settings'; });
         });
