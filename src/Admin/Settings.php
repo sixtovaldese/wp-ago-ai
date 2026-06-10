@@ -120,14 +120,14 @@ class Settings {
                                 </td>
                             </tr>
                             <tr>
-                                <th><?php esc_html_e( 'Altura Vertical', 'ago-ai-chatbot' ); ?></th>
+                                <th><?php esc_html_e( 'Vertical Position', 'ago-ai-chatbot' ); ?></th>
                                 <td>
                                     <select id="ago-widget-offset">
-                                        <option value="0" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 0 ); ?>><?php esc_html_e( 'Estandar (default)', 'ago-ai-chatbot' ); ?></option>
-                                        <option value="1" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 1 ); ?>><?php esc_html_e( 'Un nivel arriba (+80px)', 'ago-ai-chatbot' ); ?></option>
-                                        <option value="2" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 2 ); ?>><?php esc_html_e( 'Dos niveles arriba (+160px)', 'ago-ai-chatbot' ); ?></option>
+                                        <option value="0" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 0 ); ?>><?php esc_html_e( 'Standard (default)', 'ago-ai-chatbot' ); ?></option>
+                                        <option value="1" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 1 ); ?>><?php esc_html_e( 'One level up (+80px)', 'ago-ai-chatbot' ); ?></option>
+                                        <option value="2" <?php selected( (int) ( $settings['widget_offset'] ?? 0 ), 2 ); ?>><?php esc_html_e( 'Two levels up (+160px)', 'ago-ai-chatbot' ); ?></option>
                                     </select>
-                                    <p class="description"><?php esc_html_e( 'Sube el widget verticalmente para no chocar con otros botones flotantes (ej. WhatsApp).', 'ago-ai-chatbot' ); ?></p>
+                                    <p class="description"><?php esc_html_e( 'Raise the widget vertically to avoid overlapping other floating buttons (e.g. WhatsApp).', 'ago-ai-chatbot' ); ?></p>
                                 </td>
                             </tr>
                             <tr>

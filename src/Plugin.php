@@ -142,7 +142,10 @@ class Plugin {
             // stored silently surfaces later as a generic chat failure.
             $check = GeminiAPI::validate_key( $settings['api_key'] );
             if ( empty( $check['ok'] ) ) {
-                return new \WP_REST_Response( [ 'saved' => false, 'error' => 'Invalid API key: ' . ( $check['error'] ?? '' ) ], 400 );
+                return new \WP_REST_Response( [
+                    'saved' => false,
+                    'error' => __( 'Invalid API key:', 'ago-ai-chatbot' ) . ' ' . ( $check['error'] ?? '' ),
+                ], 400 );
             }
         }
         update_option( 'agoaichat_settings', $settings );

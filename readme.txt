@@ -1,11 +1,11 @@
 === aGo AI Chatbot, AI Chat Widget with Knowledge Base ===
-Contributors: sixtovaldese
+Contributors: agolab
 Donate link: https://paypal.me/sixtovaldes
 Tags: ai chatbot, ai chat, chat widget, customer support, ai assistant
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 2. The AI chat widget answering a visitor question on the site.
 
 == Changelog ==
+
+= 1.3.0 =
+* Model list is now dynamic: every Gemini Lite, Flash and Pro text chat model available to your API key appears in the selector (previously a fixed list of 6).
+* The API key is validated against the Gemini API when saving settings. Invalid keys are rejected with the real error message instead of being stored silently.
+* The settings page now shows the actual error when saving fails.
+* Fixed Spanish source strings in the widget position selector (now proper English with es_ES and pt_BR translations).
 
 = 1.2.0 =
 * Prefixed all internal identifiers with `agoaichat` / `AGOAICHAT_` and namespace `AgoLab\AIChatbot` to avoid conflicts with other plugins.

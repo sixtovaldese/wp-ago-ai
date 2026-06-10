@@ -28,7 +28,7 @@
                 rate_limit_per_minute: parseInt(($('#ago-rate-limit') || {}).value || '60', 10),
             };
             saveBtn.disabled = true; saveBtn.textContent = 'Saving...';
-            fetch(restUrl + '/settings', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce }, body: JSON.stringify(data) })
+            fetch(restUrl + '/settings?_locale=user', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce }, body: JSON.stringify(data) })
             .then(function (r) { return r.json(); })
             .then(function (res) { showStatus(res.saved ? 'success' : 'error', res.saved ? 'Settings saved.' : (res.error || 'Error.')); })
             .catch(function (e) { showStatus('error', e.message); })

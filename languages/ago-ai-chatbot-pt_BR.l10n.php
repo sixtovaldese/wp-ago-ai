@@ -2,6 +2,8 @@
 defined( 'ABSPATH' ) || exit;
 
 return ['x-generator'=>'aGo AI','translation-revision-date'=>'2026-03-17','plural-forms'=>'nplurals=2; plural=n != 1;','project-id-version'=>'aGo AI 1.0.0','language'=>'pt_BR','messages'=>[
+'Invalid API key:'=>'Chave de API inválida:',
+'aGo AI Chatbot Pro is active on this site and replaces this free version. You can safely deactivate and delete "aGo AI Chatbot" from the Plugins page. Your settings, files and conversations are preserved.'=>'O aGo AI Chatbot Pro está ativo neste site e substitui esta versão gratuita. Você pode desativar e excluir o "aGo AI Chatbot" na página de Plugins com segurança. Suas configurações, arquivos e conversas são preservados.',
 'aGo Tools'=>'aGo Ferramentas',
 'aGo AI'=>'aGo AI',
 'AI Chatbot'=>'Chatbot IA',
@@ -77,11 +79,11 @@ return ['x-generator'=>'aGo AI','translation-revision-date'=>'2026-03-17','plura
 'Upload Image'=>'Enviar imagem',
 'Remove'=>'Remover',
 'JPG, PNG or WebP. Max 1MB. Recommended: 96x96px.'=>'JPG, PNG ou WebP. Máx. 1MB. Recomendado: 96x96px.',
-'Altura Vertical'=>'Altura vertical',
-'Estandar (default)'=>'Padrão (default)',
-'Un nivel arriba (+80px)'=>'Um nível acima (+80px)',
-'Dos niveles arriba (+160px)'=>'Dois níveis acima (+160px)',
-'Sube el widget verticalmente para no chocar con otros botones flotantes (ej. WhatsApp).'=>'Eleva o widget verticalmente para não colidir com outros botões flutuantes (ex. WhatsApp).',
+'Vertical Position'=>'Altura vertical',
+'Standard (default)'=>'Padrão (default)',
+'One level up (+80px)'=>'Um nível acima (+80px)',
+'Two levels up (+160px)'=>'Dois níveis acima (+160px)',
+'Raise the widget vertically to avoid overlapping other floating buttons (e.g. WhatsApp).'=>'Eleva o widget verticalmente para não colidir com outros botões flutuantes (ex. WhatsApp).',
 'Upload files (PDF, TXT, CSV, MD, JSON) for the AI to use as reference. Files are processed by Gemini.'=>'Envie arquivos (PDF, TXT, CSV, MD, JSON) para a IA usar como referência. Os arquivos são processados pelo Gemini.',
 'Limits & Notifications'=>'Limites e Notificações',
 'Max Input Tokens'=>'Máximo de tokens de entrada',
