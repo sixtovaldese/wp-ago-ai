@@ -55,10 +55,6 @@
 .ago-ai-task-form button { width: 100%; padding: 8px; border: none; border-radius: 6px; color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; }
 .ago-ai-task-sent { text-align: center; color: #00a32a; font-size: 13px; padding: 10px; }
 
-/* Powered by */
-.ago-ai-powered { text-align: center; padding: 4px; font-size: 10px; color: #999; }
-.ago-ai-powered a { color: #999; text-decoration: none; }
-
 @media (max-width: 480px) {
     .ago-ai-window { width: 100%; max-width: 100%; bottom: 0; right: 0; left: 0; height: 100vh; max-height: 100vh; border-radius: 0; }
     .ago-ai-toggle { bottom: 16px; }

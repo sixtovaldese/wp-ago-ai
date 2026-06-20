@@ -3,7 +3,7 @@
  * Plugin Name:       aGo AI Chatbot, AI Chat Widget with Knowledge Base
  * Plugin URI:        https://ago.cl/herramientas/wordpress/ago-ai-chat/docs/
  * Description:       AI chat widget that answers visitor questions from your own knowledge files (PDF, TXT, CSV, MD, JSON), powered by Google Gemini. Fully functional, no built-in limits, no signup.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Requires at least: 6.0
  * Requires PHP:      8.1
  * Author:            aGo Lab
@@ -33,7 +33,7 @@ if ( $agoaichat_pro_active ) {
     return;
 }
 
-defined( 'AGOAICHAT_VERSION' ) || define( 'AGOAICHAT_VERSION', '1.3.0' );
+defined( 'AGOAICHAT_VERSION' ) || define( 'AGOAICHAT_VERSION', '1.3.1' );
 defined( 'AGOAICHAT_FILE' )    || define( 'AGOAICHAT_FILE', __FILE__ );
 defined( 'AGOAICHAT_PATH' )    || define( 'AGOAICHAT_PATH', plugin_dir_path( __FILE__ ) );
 defined( 'AGOAICHAT_URL' )     || define( 'AGOAICHAT_URL', plugin_dir_url( __FILE__ ) );

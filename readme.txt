@@ -5,7 +5,7 @@ Tags: ai chatbot, ai chat, chat widget, customer support, ai assistant
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 
 == Changelog ==
 
+= 1.3.1 =
+* Removed the front-end credit link from the chat widget (no external links rendered on the public site).
+
 = 1.3.0 =
 * Model list is now dynamic: every Gemini Lite, Flash and Pro text chat model available to your API key appears in the selector (previously a fixed list of 6).
 * The API key is validated against the Gemini API when saving settings. Invalid keys are rejected with the real error message instead of being stored silently.
@@ -173,6 +176,9 @@ Deactivate and delete from the Plugins screen. The plugin removes its options on
 * Translations: English, Spanish, Portuguese (Brazilian).
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+Compliance fix: removes the front-end credit link from the widget.
 
 = 1.2.0 =
 Unique internal prefixes, hardened public chat endpoint, and naming fixes required for WordPress.org compliance.
